@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plataforme - Connexion</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Arial, sans-serif;
+        }
+        
+        body {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+        line-height: 1.6;
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+        }
+        
+        
+        .container {
+            width: 100%;
+            max-width: 400px;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .platform-name {
+            font-size: 28px;
+            font-weight: bold;
+            margin-bottom: 5px;
+            letter-spacing: 1px;
+        }
+        span{
+           color: #FFD700;
+        }
+        
+        .platform-subtitle {
+            font-size: 14px;
+            opacity: 0.8;
+        }
+        
+        .login-box {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 30px;
+            
+        }
+        
+        .login-title {
+            text-align: center;
+            margin-bottom: 25px;
+            font-weight: 600;
+            font-size: 42px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .input-field {
+            width: 100%;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            color: #666;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            border: solid 1px;
+        }
+        
+        .input-field::placeholder {
+            color:#666;
+        }
+        
+        .input-field:focus {
+            outline: none;
+            background: rgba(255, 255, 255, 0.25);
+            border-color: rgba(255, 255, 255, 0.4);
+        }
+        
+
+        .checkbox-container {        
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .checkbox-container input {
+            margin-right: 10px;
+            width: 18px;
+            height: 18px;
+        }
+        
+        .checkbox-label {
+            font-size: 14px;
+        }
+        
+        .forgot-password {
+            text-align: right;
+            margin-bottom: 25px;
+        }
+        
+        .forgot-password a {
+            color: #3498db;
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.3s ease;
+        }
+        
+        .forgot-password a:hover {
+            color: #5dade2;
+            text-decoration: underline;
+        }
+        
+        .divider {
+            height: 1px;
+            background: rgba(255, 255, 255, 0.2);
+            margin: 25px 0;
+        }
+        
+        .login-btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s;
+            background-color: #FFD700;
+            color: #333;
+            font-weight: 600;
+            width: 340px;
+            
+        }
+        
+        .login-btn:hover {
+            background-color: #FFC700;
+        }
+        
+        
+        .register-link {
+            text-align: center;
+            margin: 20px 0 30px;
+            font-size: 14px;
+        }
+        
+        .register-link a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        
+        
+        
+        
+        /* Modal Mot de passe oublié */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .input-field1{
+            width: 100%;
+            padding: 15px;
+            background: white;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            color: #666;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            border: solid 1px;
+        }
+        
+        .modal-content {
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            border-radius: 15px;
+            width: 90%;
+            max-width: 450px;
+            padding: 30px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+            position: relative;
+            animation: modalFadeIn 0.4s ease;
+        }
+        
+        @keyframes modalFadeIn {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 24px;
+            cursor: pointer;
+            color: rgba(255, 255, 255, 0.7);
+            transition: color 0.3s ease;
+        }
+        
+        .close-modal:hover {
+            color: white;
+        }
+        
+        .modal-title {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 22px;
+            color: white;
+        }
+        
+        .modal-text {
+            margin-bottom: 20px;
+            text-align: center;
+            opacity: 0.9;
+            line-height: 1.5;
+            color: white;
+        }
+        
+        .modal-btn {
+            width: 100%;
+            padding: 15px;
+            background-color: #FFD700;
+            color: black;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 15px;
+            transition: background 0.3s ease;
+        }
+        
+        .modal-btn:hover {
+            background-color: #FFC700;
+        }
+        
+        .success-message {
+            display: none;
+            text-align: center;
+            padding: 15px;
+            background: rgb(235, 230, 230);
+            border-radius: 8px;
+            margin-top: 20px;
+            border: 1px solid #fdf9f9;
+        }
+        
+        @media (max-width: 480px) {
+            .login-box {
+                padding: 20px;
+            }
+            
+            .social-buttons, .social-row {
+                flex-direction: column;
+            }
+            
+            .social-btn {
+                margin: 5px 0;
+            }
+            
+            .modal-content {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="platform-name">Vision<span>Flow</span></div>
+            <div class="platform-subtitle">Organisez vos événements avec facilité et clarté</div>
+        </div>
+        
+        <div class="login-box">
+            <h2 class="login-title">CONNEXION</h2>
+            
+            <form id="loginForm">
+                <div class="form-group">
+                    <input type="email" class="input-field" placeholder="Email" required>
+                </div>
+                
+                <div class="form-group">
+                    <input type="password" class="input-field" id="password" placeholder="Mot de passe" required>
+                </div>
+                
+                <div class="checkbox-container">
+                    <input type="checkbox" id="show-password">
+                    <label for="show-password" class="checkbox-label">Mot de passe visible</label>
+                </div>
+                
+                <div class="forgot-password">
+                    <a href="#" id="forgot-password-link">Mot de passe oublié ?</a>
+                </div>
+                
+                <button type="submit" class="login-btn">Se Connecter</button>
+            </form>
+            
+            <div class="divider"></div>
+            
+            <div class="register-link">
+                J'ai pas de compte, <a href="compte.html">Créer Compte</a>
+            </div>
+            
+        </div>
+    </div>
+    
+    <!-- Modal Mot de passe oublié -->
+    <div class="modal" id="forgotPasswordModal">
+        <div class="modal-content">
+            <span class="close-modal" id="closeModal">&times;</span>
+            <h2 class="modal-title">Mot de passe oublié</h2>
+            <p class="modal-text">Entrez votre adresse email pour réinitialiser votre mot de passe. Vous recevrez un lien de réinitialisation par email.</p>
+            
+            <form id="resetPasswordForm">
+                <div class="form-group">
+                    <input type="email" class="input-field1" id="reset-email" placeholder="Votre adresse email" required>
+                </div>
+                <button type="submit" class="modal-btn">RÉINITIALISER LE MOT DE PASSE</button>
+            </form>
+            
+            <div class="success-message" id="successMessage">
+                <p>✓ Un email de réinitialisation a été envoyé à votre adresse.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Éléments du DOM
+            const showPasswordCheckbox = document.getElementById('show-password');
+            const passwordField = document.getElementById('password');
+            const forgotPasswordLink = document.getElementById('forgot-password-link');
+            const forgotPasswordModal = document.getElementById('forgotPasswordModal');
+            const closeModal = document.getElementById('closeModal');
+            const resetPasswordForm = document.getElementById('resetPasswordForm');
+            const successMessage = document.getElementById('successMessage');
+            const loginForm = document.getElementById('loginForm');
+            
+            // Gestion de l'affichage du mot de passe
+            showPasswordCheckbox.addEventListener('change', function() {
+                passwordField.type = this.checked ? 'text' : 'password';
+            });
+            
+            // Ouvrir le modal "Mot de passe oublié"
+            forgotPasswordLink.addEventListener('click', function(e) {
+                e.preventDefault();
+                forgotPasswordModal.style.display = 'flex';
+            });
+            
+            // Fermer le modal
+            closeModal.addEventListener('click', function() {
+                forgotPasswordModal.style.display = 'none';
+                resetForm();
+            });
+            
+            // Fermer le modal en cliquant à l'extérieur
+            window.addEventListener('click', function(e) {
+                if (e.target === forgotPasswordModal) {
+                    forgotPasswordModal.style.display = 'none';
+                    resetForm();
+                }
+            });
+            
+            // Soumission du formulaire de réinitialisation
+            resetPasswordForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Simulation d'envoi d'email
+                const email = document.getElementById('reset-email').value;
+                
+                // Afficher le message de succès
+                successMessage.style.display = 'block';
+                
+                // Réinitialiser le formulaire après 3 secondes et fermer le modal
+                setTimeout(function() {
+                    resetForm();
+                    forgotPasswordModal.style.display = 'none';
+                }, 3000);
+            });
+            
+            // Soumission du formulaire de connexion
+            loginForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                alert('Connexion simulée avec succès!');
+            });
+            
+            // Fonction pour réinitialiser le formulaire
+            function resetForm() {
+                resetPasswordForm.reset();
+                successMessage.style.display = 'none';
+            }
+            
+            // Animation d'entrée
+            const loginBox = document.querySelector('.login-box');
+            loginBox.style.opacity = '0';
+            loginBox.style.transform = 'translateY(20px)';
+            
+            setTimeout(() => {
+                loginBox.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                loginBox.style.opacity = '1';
+                loginBox.style.transform = 'translateY(0)';
+            }, 100);
+        });
+    </script>
+</body>
+</html>
